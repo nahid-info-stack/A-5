@@ -10,7 +10,7 @@ const displayIssues = (issues) =>{
     console.log(issues);
     // 1. get the container 
     const issuescontainer=document.getElementById('issue-container');
-    //issuescontainer.innerHTML="";
+    issuescontainer.innerHTML="";
     // 2. show every single element
     issues.forEach(issue => {
         console.log(issue);
@@ -50,6 +50,29 @@ const displayIssues = (issues) =>{
         
     });
     
+}
+let allActive = 'all';
+const btnActive = ['btn-primary'];
+const btnUnActive = ['btn-soft'];
+const activeBtn = (active)=>{
+    console.log(active);
+    const btns = ['all','open','closed'];
+    for (const btn of btns) {
+        const btnName = document.getElementById("btn-" + btn);
+        console.log(btnName);
+
+        if( btn === active){
+            allActive = btn;
+
+            btnName.classList.remove(...btnUnActive);
+            btnName.classList.add(...btnActive);
+        }else {
+            btnName.classList.add(...btnUnActive);
+            btnName.classList.remove(...btnActive);
+        
+    }
+ }
 
 }
+activeBtn(allActive)
 issueLoding();
