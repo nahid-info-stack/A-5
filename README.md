@@ -85,7 +85,9 @@
 
 - Create a readme file and answer this question on your own. Don’t copy-paste from Google or any AI chatbot. 
     - 1️⃣ What is the difference between var, let, and const?
+    ans: var redeclare and let and const not redecleare var function scope.
     - 2️⃣ What is the spread operator (...)?
+    ans: spread array and object elements expand copy shorthand
     - 3️⃣ What is the difference between map(), filter(), and forEach()?
     - 4️⃣ What is an arrow function?
     - 5️⃣ What are template literals?
