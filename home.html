@@ -65,7 +65,7 @@
                     <img class="h-full" src="./assets/Aperture.png" alt="Aperture image">
                 </div>
                 <div>
-                    <h2 class="text-xl font-semibold text-[#1F2937]">50 Issues</h2>
+                    <h2 class="text-xl font-semibold text-[#1F2937]"> <span id="cardCount">50</span> Issues</h2>
                     <p class="text-[#64748B]">Track and manage your project issues</p>
                 </div>
             </div>
@@ -76,8 +76,19 @@
 
         </section>
 
-        <section id="issue-container" class="issue-card-container mt-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-3">
+        <section id="parent-container">
+       
+            <section id="issue-container" class=".hidden mt-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-3 item- ">
             
+           </section>
+        <!-- open section -->
+         <section id="open-container" class=".hidden mt-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-3 ">
+            
+        </section>
+        <!-- closed section -->
+         <section id="closed-container" class=".hidden   mt-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4  gap-3">
+            
+        </section>
         </section>
        
     </main>

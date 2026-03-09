@@ -1,16 +1,24 @@
 console.log('homes here');
+let allIssue = [];
 
 const issueLoding = () => {
     fetch('https://phi-lab-server.vercel.app/api/v1/lab/issues')
 .then(res => res.json())
-.then(json => displayIssues(json.data))
+.then(json => {
+    allIssue=json.data;
+    displayIssues(allIssue);
+});
+
 
 }
 const displayIssues = (issues) =>{
     console.log(issues);
     // 1. get the container 
+    document.getElementById("cardCount").innerText =issues.length;
     const issuescontainer=document.getElementById('issue-container');
     issuescontainer.innerHTML="";
+    openContainer.innerHTML = "";
+    closedContainer.innerHTML = "";
     // 2. show every single element
     issues.forEach(issue => {
         console.log(issue);
@@ -19,7 +27,7 @@ const displayIssues = (issues) =>{
     const createCard = document.createElement('div');
     createCard.className = `issue-card ${issue.status === 'open' ? 'border-t-4 border-green-500' : 'border-t-4 border-purple-500'}`;
     createCard.innerHTML=`
-    <div class="card bg-base-100 rounded-lg p-4 shadow-md space-y-3 w-full">
+    <div class="card bg-base-100 rounded-lg p-4 shadow-md space-y-3  h-full">
                 <div class="flex justify-between">
                     <div >
                     <img src="./assets/${issue.status == "open" ? "Open-Status.png" : "Closed- Status .png"}" alt="">
@@ -45,8 +53,14 @@ const displayIssues = (issues) =>{
             </div>
     
     `;
+    if(issue.status === "open"){
+            openContainer.appendChild(createCard);
+        }else{
+            closedContainer.appendChild(createCard);
+        }
+
     // 4. append the chiled into the container
-    issuescontainer.appendChild(createCard);
+    issuescontainer.appendChild(createCard.cloneNode(true));
         
     });
     
@@ -54,8 +68,21 @@ const displayIssues = (issues) =>{
 let allActive = 'all';
 const btnActive = ['btn-primary'];
 const btnUnActive = ['btn-soft'];
+
+const issueContainer = document.getElementById('issue-container');
+const openContainer = document.getElementById('open-container');
+const closedContainer = document.getElementById('closed-container');
+console.log(issueContainer,openContainer,closedContainer)
+
+const allSection = [issueContainer,openContainer,closedContainer];
 const activeBtn = (active)=>{
-    console.log(active);
+    //console.log(active);
+
+    let filteredIssues = [];
+    if(active === "all") filteredIssues = allIssue;
+    else if(active === "open") filteredIssues = allIssue.filter(i => i.status === "open");
+    else filteredIssues = allIssue.filter(i => i.status === "closed");
+
     const btns = ['all','open','closed'];
     for (const btn of btns) {
         const btnName = document.getElementById("btn-" + btn);
@@ -71,8 +98,26 @@ const activeBtn = (active)=>{
             btnName.classList.remove(...btnActive);
         
     }
+     displayIssues(filteredIssues);
+ }
+
+ for (const section of allSection) {
+    section.classList.add('hidden');
+    
+ }
+
+ if(active === 'all'){
+    issueContainer.classList.remove('hidden');
+
+ }else if ( active === 'open'){
+    openContainer.classList.remove('hidden')
+
+ }else{
+    closedContainer.classList.remove('hidden')
  }
 
 }
-activeBtn(allActive)
+
+
+activeBtn(allActive);
 issueLoding();
